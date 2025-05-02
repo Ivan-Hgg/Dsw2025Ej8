@@ -34,54 +34,11 @@ public abstract class CuentaBancaria
     }
 
 
-    public void Depositar(decimal monto)
-    {
-        if (monto <=0)
-        {
-            throw new MontoNoValido();
-        }
-        if()
-        
-        if (_tipo == TipoCuenta.CajaDeAhorro)
-        {
-            _saldo += monto;
-        }
-        else if (_tipo == TipoCuenta.CuentaCorriente)
-        {
-            monto -= monto * _comision;
-            _saldo += monto;
-        }
-    }
+    public abstract void Depositar(decimal monto);
 
-    public void Retirar(decimal monto)
-    { 
-        if (monto <= 0)
-        {
-            throw new MontoNoValido();
-        }
+    public abstract void Retirar(decimal monto);
+    
+    
 
-        /*if (_tipo == TipoCuenta.CajaDeAhorro)
-        {
-            _saldo -= monto;
-        }
-        else if (_tipo == TipoCuenta.CuentaCorriente)
-        {
-            if (_saldo - monto >= -_limiteDeDescubierto)
-            {
-                _saldo -= monto;
-            }
-            if (_saldo < 0)
-            {
-                _estado = Estado.Suspendida;
-            }*/
-        }
-    }
-
-    public void AplicarInteres()
-    {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
-        {
-            _saldo += _saldo * _tasaDeInteres;
-        }
-    }
+    
 }
