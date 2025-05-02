@@ -1,7 +1,5 @@
-﻿using Dsw2025Ej8.Domain.Excepciones;
-using System.Data;
-
-namespace Dsw2025Ej8.Domain;
+﻿namespace Dsw2025Ej8.Domain;
+using Dsw2025Ej8.Domain.Excepciones;
 
 public abstract class CuentaBancaria
 {
@@ -18,6 +16,7 @@ public abstract class CuentaBancaria
         Estado = Estado.Activa;
         Titulares = titulares;
     }
+
     public void Desactivar()
     {
         Estado = Estado.Inactiva;
@@ -33,12 +32,7 @@ public abstract class CuentaBancaria
         Estado = Estado.Suspendida;
     }
 
-
     public abstract void Depositar(decimal monto);
 
     public abstract void Retirar(decimal monto);
-    
-    
-
-    
 }

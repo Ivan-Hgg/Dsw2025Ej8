@@ -7,52 +7,49 @@ using System.Threading.Tasks;
 
 namespace Dsw2025Ej8.Domain;
 
-class CajaAhorro : CuentaBancaria
+public class CajaDeAhorro : CuentaBancaria
 {
-    public decimal TasaDeInteres {  get; init; }
+    public decimal TasaDeInteres { get; init; }
 
-    public CajaAhorro (string numero, decimal saldo, string[] titulares) : base(numero, saldo, titulares)
+    public CajaDeAhorro(string numero, decimal saldo, string[] titulares)
+        : base(numero, saldo, titulares)
     {
-    }
-    //ya estaria, revisar el aplicar interes
-    public override void Depositar(decimal monto)
-    {
-        if (monto <= 0)
-        {
-            throw new MontoNoValido();
-        }
-        if (this.Estado != Estado.Activa)
-        {
-            throw new CuentaNoActiva(this.Estado);
-        }
-        this.Saldo += monto;
-        
-    }
-
-
-    public override void Retirar(decimal monto)
-    {
-        if (monto <= 0)
-        {
-            throw new MontoNoValido();
-        }
-        if (this.Estado != Estado.Activa)
-        {
-            throw new CuentaNoActiva(this.Estado);
-        }
-        if (this.Saldo < 0)
-        {
-            this.Suspender();
-        }
-        this.Saldo -= monto;
-
-
     }
 
     public void AplicarInteres()
     {
+        Saldo += Saldo * TasaDeInteres;
+    }
 
-        Saldo *=  TasaDeInteres;
-        
+    public override void Retirar(decimal monto)
+    {
+        if (Estado != Estado.Activa)
+        {
+            throw new CuentaNoActiva(this);
+        }
+        if (monto <= 0)
+        {
+            throw new MontoNoValido();
+        }
+        if (Saldo - monto < 0)
+        {
+            base.Suspender();
+            throw new SaldoInsuficiente();
+        }
+        Saldo -= monto;
+    }
+
+    public override void Depositar(decimal monto)
+    {
+        if (Estado != Estado.Activa)
+        {
+            throw new CuentaNoActiva(this);
+        }
+        if (monto <= 0)
+        {
+            throw new MontoNoValido();
+        }
+
+        Saldo += monto;
     }
 }
