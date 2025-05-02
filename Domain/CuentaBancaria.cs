@@ -1,8 +1,10 @@
-﻿namespace Dsw2025Ej8.Domain;
+﻿using Dsw2025Ej8.Domain.Excepciones;
+using System.Data;
+
+namespace Dsw2025Ej8.Domain;
 
 public class CuentaBancaria
 {
-    private TipoCuenta _tipo;
     private string _numero;
     private decimal _saldo;
     private Estado _estado;
@@ -82,6 +84,12 @@ public class CuentaBancaria
 
     public void Depositar(decimal monto)
     {
+        if (monto <=0)
+        {
+            throw new MontoNoValido();
+        }
+        if()
+        
         if (_tipo == TipoCuenta.CajaDeAhorro)
         {
             _saldo += monto;
@@ -94,7 +102,12 @@ public class CuentaBancaria
     }
 
     public void Retirar(decimal monto)
-    {
+    { 
+        if (monto <= 0)
+        {
+            throw new MontoNoValido();
+        }
+
         if (_tipo == TipoCuenta.CajaDeAhorro)
         {
             _saldo -= monto;
