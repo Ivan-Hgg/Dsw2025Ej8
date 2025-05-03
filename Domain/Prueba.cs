@@ -9,7 +9,7 @@ namespace Dsw2025Ej8.Domain;
 
 public static class Prueba
 {
-    public static string[] _titulares =
+    public static string[] Titulares =
     {
         "Facu",
         "Tadeo",
@@ -21,19 +21,19 @@ public static class Prueba
     {
         // Para el número de cuenta, el primer dígito es el número de posición en el array
         // y el segundo dígito es el tipo de cuenta: ahorro = 1 y corriente = 2
-        CajaDeAhorro cuentaAhorro1 = new("01", 1000, _titulares)
+        CajaDeAhorro cuentaAhorro1 = new("01", 1000, Titulares)
         {
             TasaDeInteres = 0.05m
         };
-        CajaDeAhorro cuentaAhorro2 = new("11", 500, _titulares)
+        CajaDeAhorro cuentaAhorro2 = new("11", 500, Titulares)
         {
             TasaDeInteres = 1.0m
         };
-        CuentaCorriente cuentaCorriente1 = new("22", 2000, _titulares)
+        CuentaCorriente cuentaCorriente1 = new("22", 2000, Titulares)
         {
             LimiteDeDescubierto = 500
         };
-        CuentaCorriente cuentaCorriente2 = new("32", -500, _titulares)
+        CuentaCorriente cuentaCorriente2 = new("32", -500, Titulares)
         {
             LimiteDeDescubierto = 1000
         };
