@@ -21,19 +21,19 @@ public static class Prueba
     {
         // Para el número de cuenta, el primer dígito es el número de posición en el array
         // y el segundo dígito es el tipo de cuenta: ahorro = 1 y corriente = 2
-        CajaDeAhorro cuentaAhorro1 = new CajaDeAhorro("01", 1000, _titulares)
+        CajaDeAhorro cuentaAhorro1 = new("01", 1000, _titulares)
         {
             TasaDeInteres = 0.05m
         };
-        CajaDeAhorro cuentaAhorro2 = new CajaDeAhorro("11", 500, _titulares)
+        CajaDeAhorro cuentaAhorro2 = new("11", 500, _titulares)
         {
             TasaDeInteres = 1.0m
         };
-        CuentaCorriente cuentaCorriente1 = new CuentaCorriente("22", 2000, _titulares)
+        CuentaCorriente cuentaCorriente1 = new("22", 2000, _titulares)
         {
             LimiteDeDescubierto = 500
         };
-        CuentaCorriente cuentaCorriente2 = new CuentaCorriente("32", -500, _titulares)
+        CuentaCorriente cuentaCorriente2 = new("32", -500, _titulares)
         {
             LimiteDeDescubierto = 1000
         };
@@ -50,168 +50,167 @@ public static class Prueba
     {
         Cuentas[3].Desactivar();
         System.Threading.Thread.Sleep(3000);
-        Cuentas[3].Depositar(500);
+        try
+        {
+            Cuentas[3].Depositar(500);
+        }
+        catch (CuentaNoActiva ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (MontoNoValido ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (SaldoInsuficiente ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     public static void Deposito()
     {
-        Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero} es ${Cuentas[1].Saldo}");
-        Cuentas[1].Depositar(500);
-        Console.WriteLine($"Se depositaron $500");
-        Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero} es ${Cuentas[1].Saldo}");
-        Console.WriteLine("En tres segundo intentara depositar monto = -1");
-        System.Threading.Thread.Sleep(3000);
-        Cuentas[1].Depositar(-1);
+        try
+        {
+            Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero} es ${Cuentas[1].Saldo}");
+            Cuentas[1].Depositar(500);
+            Console.WriteLine($"Se depositaron $500");
+            Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero} es ${Cuentas[1].Saldo}");
+            Console.WriteLine("En tres segundo intentara depositar monto = -1");
+            System.Threading.Thread.Sleep(3000);
+            Cuentas[1].Depositar(-1);
+        }
+        catch (CuentaNoActiva ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (MontoNoValido ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (SaldoInsuficiente ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     public static void Retiro()
     {
-        Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero}  es  ${Cuentas[1].Saldo}");
-        Cuentas[1].Retirar(1000);
-        Console.WriteLine($"Se retiraron $1000");
-        Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero}  es  ${Cuentas[1].Saldo}");
-        Console.WriteLine("En tres segundo se intentara retirar 500 mas");
-        System.Threading.Thread.Sleep(3000);
-        Cuentas[1].Retirar(500);
+        try
+        {
+            Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero}  es  ${Cuentas[1].Saldo}");
+            Cuentas[1].Retirar(1000);
+            Console.WriteLine($"Se retiraron $1000");
+            Console.WriteLine($"Saldo de la cuenta {Cuentas[1].Numero}  es  ${Cuentas[1].Saldo}");
+            Console.WriteLine("En tres segundo se intentara retirar 500 mas");
+            System.Threading.Thread.Sleep(3000);
+            Cuentas[1].Retirar(500);
+        }
+        catch (CuentaNoActiva ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (MontoNoValido ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (SaldoInsuficiente ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     public static void RetiroDescubierto()
     {
-        Console.WriteLine($"Saldo de la cuenta {Cuentas[2].Numero}  es  ${Cuentas[2].Saldo}");
-        Cuentas[2].Retirar(2001);
-        Console.WriteLine($"Se retiraron $2001");
-        Console.WriteLine($"Saldo de la cuenta {Cuentas[2].Numero}  es  ${Cuentas[2].Saldo}");
-        Console.WriteLine("En tres segundo se intentara retirar 500 mas");
-        System.Threading.Thread.Sleep(3000);
-        Cuentas[2].Retirar(500);
-
+        try
+        {
+            Console.WriteLine($"Saldo de la cuenta {Cuentas[2].Numero}  es  ${Cuentas[2].Saldo}");
+            Cuentas[2].Retirar(2001);
+            Console.WriteLine($"Se retiraron $2001");
+            Console.WriteLine($"Saldo de la cuenta {Cuentas[2].Numero}  es  ${Cuentas[2].Saldo}");
+            Console.WriteLine("En tres segundo se intentara retirar 500 mas");
+            System.Threading.Thread.Sleep(3000);
+            Cuentas[2].Retirar(500);
+        }
+        catch (CuentaNoActiva ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (MontoNoValido ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (SaldoInsuficiente ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
     public static void Interes()
     {
-        if (Cuentas[0] is CajaDeAhorro cuentaAhorro)
+        try
         {
-            Console.WriteLine($"Saldo de la cuenta {cuentaAhorro.Numero} es ${cuentaAhorro.Saldo}");
-            cuentaAhorro.AplicarInteres();
-            Console.WriteLine("Se aplico el interes");
-            Console.WriteLine($"Saldo de la cuenta {cuentaAhorro.Numero}  es  ${cuentaAhorro.Saldo}");
+            if (Cuentas[0] is CajaDeAhorro cuentaAhorro)
+            {
+                Console.WriteLine($"Saldo de la cuenta {cuentaAhorro.Numero} es ${cuentaAhorro.Saldo}");
+                cuentaAhorro.AplicarInteres();
+                Console.WriteLine("Se aplico el interes");
+                Console.WriteLine($"Saldo de la cuenta {cuentaAhorro.Numero}  es  ${cuentaAhorro.Saldo}");
+            }
+        }
+        catch (CuentaNoActiva ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (MontoNoValido ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+        catch (SaldoInsuficiente ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 
     public static void Pruebita()
     {
         Console.WriteLine("Prueba de excepciones");
-        Console.WriteLine("Estado actual de las cuentas:");
-        Console.WriteLine($"Cuenta {Cuentas[0].Numero}, Saldo: ${Cuentas[0].Saldo}, Estado: {Cuentas[0].Estado}");
-        Console.WriteLine($"Cuenta {Cuentas[1].Numero}, Saldo: ${Cuentas[1].Saldo}, Estado: {Cuentas[1].Estado}");
-        Console.WriteLine($"Cuenta {Cuentas[2].Numero}, Saldo: ${Cuentas[2].Saldo}, Estado: {Cuentas[2].Estado}");
-        Console.WriteLine($"Cuenta {Cuentas[3].Numero}, Saldo: ${Cuentas[3].Saldo}, Estado: {Cuentas[3].Estado}");
-        Console.WriteLine("");
+        Mostrar();
         Console.WriteLine("Prueba 1: Cuenta Activa-Inactiva");
-
-        try
-        {
-            FalloActiva();
-        }
-        catch (CuentaNoActiva ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (MontoNoValido ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (SaldoInsuficiente ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+        FalloActiva();
 
         Console.WriteLine("");
         Console.WriteLine("Prueba 2: Deposito");
-
-        try
-        {
-            Deposito();
-        }
-        catch (CuentaNoActiva ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (MontoNoValido ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (SaldoInsuficiente ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+        Deposito();
 
         Console.WriteLine("");
         Console.WriteLine("Prueba 3: Retiro");
-        try
-        {
-            Retiro();
-        }
-        catch (CuentaNoActiva ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (MontoNoValido ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (SaldoInsuficiente ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+        Retiro() ;
 
         Console.WriteLine("");
         Console.WriteLine("Prueba 4: Retiro Descubierto");
-        try
-        {
-            RetiroDescubierto();
-        }
-        catch (CuentaNoActiva ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (MontoNoValido ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (SaldoInsuficiente ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+        RetiroDescubierto();
+       
 
         Console.WriteLine("");
         Console.WriteLine("Prueba 5: Interes");
-        try
-        {
-            Interes();
-        }
-        catch (CuentaNoActiva ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (MontoNoValido ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
-        catch (SaldoInsuficiente ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-        }
+        Interes();
 
         Console.WriteLine("");
         Console.WriteLine("Fin de las pruebas");
-        Console.WriteLine("Estado actual de las cuentas:");
-        Console.WriteLine($"Cuenta {Cuentas[0].Numero}, Saldo: ${Cuentas[0].Saldo}, Estado: {Cuentas[0].Estado}");
-        Console.WriteLine($"Cuenta {Cuentas[1].Numero}, Saldo: ${Cuentas[1].Saldo}, Estado: {Cuentas[1].Estado}");
-        Console.WriteLine($"Cuenta {Cuentas[2].Numero}, Saldo: ${Cuentas[2].Saldo}, Estado: {Cuentas[2].Estado}");
-        Console.WriteLine($"Cuenta {Cuentas[3].Numero}, Saldo: ${Cuentas[3].Saldo}, Estado: {Cuentas[3].Estado}");
-        Console.WriteLine("");
+        Mostrar();
+        
         Console.WriteLine("Presione cualquier tecla para terminar...");
         Console.ReadKey();
+    }
+
+    public static void Mostrar()
+    {
+        Console.WriteLine("Estado actual de las cuentas:");
+        foreach (var cuenta in Cuentas)
+        {
+            Console.WriteLine($"Cuenta {cuenta.Numero}, Saldo: ${cuenta.Saldo}, Estado: {cuenta.Estado}");
+        }
+        Console.WriteLine("");
     }
 }
